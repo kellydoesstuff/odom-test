@@ -26,3 +26,10 @@ void gheese::TrackingWheel::reset() {
  * @return float distance traveled in inches
 */
 float gheese::TrackingWheel::get_distance_traveled() { return (float(this->rotation->get_position()) * this->diameter * M_PI / 36000); }
+
+/**
+ * @brief get offset of wheel from tracking center
+ *
+ * @return distance
+*/
+float gheese::TrackingWheel::get_offset() { return this-> distance; }

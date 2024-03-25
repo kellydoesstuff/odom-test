@@ -35,6 +35,12 @@ class TrackingWheel {
          */
         float get_distance_traveled();
 
+        /**
+         * @brief get offset of wheel from tracking center
+         *
+         * @return distance
+         */
+         float get_offset();
 
 };
 

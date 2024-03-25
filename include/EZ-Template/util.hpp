@@ -105,3 +105,14 @@ const bool SD_CARD_ACTIVE = pros::usd::is_installed();
 const int DELAY_TIME = 10;
 }  // namespace util
 }  // namespace ez
+
+namespace gheese {
+
+/**
+ * @brief converts degrees to radians
+ *
+ * @param deg degree being converted
+ * @return radians
+*/
+float deg_to_rad (float deg);
+}
