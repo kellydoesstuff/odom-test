@@ -37,9 +37,9 @@ void gheese::update() {
     imu_raw = gheese::deg_to_rad(odom_sensors.imu->get_rotation());
 
     // calc change in sensors
-    float delta_vert {vert_raw - prev_vert};
-    float delta_horiz {horiz_raw - prev_horiz};
-    float delta_imu {imu_raw - prev_imu};
+    float delta_vert = vert_raw - prev_vert;
+    float delta_horiz = horiz_raw - prev_horiz;
+    float delta_imu = imu_raw - prev_imu;
 
     // update prev sensors
     prev_vert = vert_raw;
@@ -47,10 +47,10 @@ void gheese::update() {
     prev_imu = imu_raw;
 
     // calculate heading
-    float heading {odom_pos.theta};
+    float heading = odom_pos.theta;
     heading += delta_imu;
-    float delta_heading {heading - odom_pos.theta};
-    float avg_heading {(odom_pos.theta + delta_heading)/2};
+    float delta_heading = heading - odom_pos.theta;
+    float avg_heading = (odom_pos.theta + delta_heading)/2;
 
     // calculate local x and y
     float local_x {0};

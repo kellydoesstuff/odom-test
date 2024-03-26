@@ -1,9 +1,9 @@
-bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp include/main.h \
- include/api.h include/pros/adi.h include/pros/colors.h \
- include/pros/distance.h include/pros/error.h include/pros/ext_adi.h \
- include/pros/adi.h include/pros/adi.h include/pros/gps.h \
- include/pros/imu.h include/pros/link.h include/pros/llemu.h \
- include/display/lvgl.h include/display/lv_version.h \
+bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp \
+ include/EZ-Template/util.hpp include/api.h include/pros/adi.h \
+ include/pros/colors.h include/pros/distance.h include/pros/error.h \
+ include/pros/ext_adi.h include/pros/adi.h include/pros/adi.h \
+ include/pros/gps.h include/pros/imu.h include/pros/link.h \
+ include/pros/llemu.h include/display/lvgl.h include/display/lv_version.h \
  include/display/lv_misc/lv_log.h include/display/lv_conf.h \
  include/display/lv_conf_checker.h include/display/lv_misc/lv_task.h \
  include/display/lv_misc/lv_mem.h include/display/lv_misc/lv_log.h \
@@ -76,15 +76,15 @@ bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp include/main.h \
  include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
  include/pros/screen.hpp include/pros/screen.h include/pros/vision.hpp \
  include/pros/vision.h include/pros/link.hpp include/pros/link.h \
- include/EZ-Template/api.hpp include/EZ-Template/PID.hpp \
- include/EZ-Template/util.hpp include/api.h include/EZ-Template/auton.hpp \
+ include/main.h include/api.h include/EZ-Template/api.hpp \
+ include/EZ-Template/PID.hpp include/EZ-Template/auton.hpp \
  include/EZ-Template/auton_selector.hpp \
  include/EZ-Template/drive/drive.hpp include/EZ-Template/slew.hpp \
  include/okapi/api/units/QAngle.hpp include/okapi/api/units/RQuantity.hpp \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
  include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp \
  include/autons.hpp
-include/main.h:
+include/EZ-Template/util.hpp:
 include/api.h:
 include/pros/adi.h:
 include/pros/colors.h:
@@ -237,10 +237,10 @@ include/pros/vision.hpp:
 include/pros/vision.h:
 include/pros/link.hpp:
 include/pros/link.h:
+include/main.h:
+include/api.h:
 include/EZ-Template/api.hpp:
 include/EZ-Template/PID.hpp:
-include/EZ-Template/util.hpp:
-include/api.h:
 include/EZ-Template/auton.hpp:
 include/EZ-Template/auton_selector.hpp:
 include/EZ-Template/drive/drive.hpp:

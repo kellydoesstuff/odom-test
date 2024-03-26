@@ -39,7 +39,7 @@ Pos get_pos (bool radians = false);
  * @param pose the new pose
  * @param radians true if theta is in radians, false if in degrees. False by default
  */
-void setPose(Pos pos, bool radians = false);
+void set_pos(Pos pos, bool radians = false);
 /**
  * @brief Update the pose of the robot
  *
