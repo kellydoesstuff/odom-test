@@ -77,7 +77,11 @@ bin/EZ-Template/odom/odom.cpp.o: src/EZ-Template/odom/odom.cpp \
  include/pros/rtos.hpp include/pros/rtos.h include/pros/optical.hpp \
  include/pros/optical.h include/pros/rotation.hpp include/pros/rtos.hpp \
  include/pros/screen.hpp include/pros/screen.h include/pros/vision.hpp \
- include/pros/vision.h include/pros/link.hpp include/pros/link.h
+ include/pros/vision.h include/pros/link.hpp include/pros/link.h \
+ include/EZ-Template/drive/drive.hpp include/EZ-Template/PID.hpp \
+ include/EZ-Template/slew.hpp include/okapi/api/units/QAngle.hpp \
+ include/okapi/api/units/RQuantity.hpp \
+ include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp
 include/EZ-Template/odom/odom.hpp:
 include/EZ-Template/odom/pos.hpp:
 include/EZ-Template/odom/tracking_wheel.hpp:
@@ -236,3 +240,10 @@ include/pros/vision.hpp:
 include/pros/vision.h:
 include/pros/link.hpp:
 include/pros/link.h:
+include/EZ-Template/drive/drive.hpp:
+include/EZ-Template/PID.hpp:
+include/EZ-Template/slew.hpp:
+include/okapi/api/units/QAngle.hpp:
+include/okapi/api/units/RQuantity.hpp:
+include/okapi/api/units/QLength.hpp:
+include/okapi/api/units/QTime.hpp:

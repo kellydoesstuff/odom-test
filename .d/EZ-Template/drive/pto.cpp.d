@@ -80,10 +80,12 @@ bin/EZ-Template/drive/pto.cpp.o: src/EZ-Template/drive/pto.cpp \
  include/EZ-Template/slew.hpp include/okapi/api/units/QAngle.hpp \
  include/okapi/api/units/RQuantity.hpp \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
- include/main.h include/api.h include/EZ-Template/api.hpp \
- include/EZ-Template/auton.hpp include/EZ-Template/auton_selector.hpp \
- include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp \
- include/autons.hpp
+ include/EZ-Template/odom/odom.hpp include/EZ-Template/odom/pos.hpp \
+ include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
+ include/pros/imu.hpp include/main.h include/api.h \
+ include/EZ-Template/api.hpp include/EZ-Template/auton.hpp \
+ include/EZ-Template/auton_selector.hpp include/EZ-Template/piston.hpp \
+ include/EZ-Template/sdcard.hpp include/autons.hpp
 include/EZ-Template/drive/drive.hpp:
 include/EZ-Template/PID.hpp:
 include/EZ-Template/util.hpp:
@@ -244,6 +246,11 @@ include/okapi/api/units/QAngle.hpp:
 include/okapi/api/units/RQuantity.hpp:
 include/okapi/api/units/QLength.hpp:
 include/okapi/api/units/QTime.hpp:
+include/EZ-Template/odom/odom.hpp:
+include/EZ-Template/odom/pos.hpp:
+include/EZ-Template/odom/tracking_wheel.hpp:
+include/pros/rotation.hpp:
+include/pros/imu.hpp:
 include/main.h:
 include/api.h:
 include/EZ-Template/api.hpp:

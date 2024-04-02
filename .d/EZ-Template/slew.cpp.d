@@ -81,7 +81,10 @@ bin/EZ-Template/slew.cpp.o: src/EZ-Template/slew.cpp \
  include/EZ-Template/drive/drive.hpp include/EZ-Template/slew.hpp \
  include/okapi/api/units/QAngle.hpp include/okapi/api/units/RQuantity.hpp \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
- include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp
+ include/EZ-Template/odom/odom.hpp include/EZ-Template/odom/pos.hpp \
+ include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
+ include/pros/imu.hpp include/EZ-Template/piston.hpp \
+ include/EZ-Template/sdcard.hpp
 include/EZ-Template/api.hpp:
 include/EZ-Template/PID.hpp:
 include/EZ-Template/util.hpp:
@@ -245,5 +248,10 @@ include/okapi/api/units/QAngle.hpp:
 include/okapi/api/units/RQuantity.hpp:
 include/okapi/api/units/QLength.hpp:
 include/okapi/api/units/QTime.hpp:
+include/EZ-Template/odom/odom.hpp:
+include/EZ-Template/odom/pos.hpp:
+include/EZ-Template/odom/tracking_wheel.hpp:
+include/pros/rotation.hpp:
+include/pros/imu.hpp:
 include/EZ-Template/piston.hpp:
 include/EZ-Template/sdcard.hpp:

@@ -76,7 +76,10 @@ bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp \
  include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
  include/pros/screen.hpp include/pros/screen.h include/pros/vision.hpp \
  include/pros/vision.h include/pros/link.hpp include/pros/link.h \
- include/main.h include/api.h include/EZ-Template/api.hpp \
+ include/main.h include/api.h include/EZ-Template/odom/odom.hpp \
+ include/EZ-Template/odom/pos.hpp \
+ include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
+ include/pros/imu.hpp include/EZ-Template/api.hpp \
  include/EZ-Template/PID.hpp include/EZ-Template/auton.hpp \
  include/EZ-Template/auton_selector.hpp \
  include/EZ-Template/drive/drive.hpp include/EZ-Template/slew.hpp \
@@ -239,6 +242,11 @@ include/pros/link.hpp:
 include/pros/link.h:
 include/main.h:
 include/api.h:
+include/EZ-Template/odom/odom.hpp:
+include/EZ-Template/odom/pos.hpp:
+include/EZ-Template/odom/tracking_wheel.hpp:
+include/pros/rotation.hpp:
+include/pros/imu.hpp:
 include/EZ-Template/api.hpp:
 include/EZ-Template/PID.hpp:
 include/EZ-Template/auton.hpp:

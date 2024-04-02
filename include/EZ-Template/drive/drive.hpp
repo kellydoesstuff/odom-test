@@ -17,6 +17,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "okapi/api/units/QLength.hpp"
 #include "okapi/api/units/QTime.hpp"
 #include "pros/motors.h"
+#include "EZ-Template/odom/odom.hpp"
+#include "EZ-Template/odom/pos.hpp"
+#include "EZ-Template/odom/tracking_wheel.hpp" 
+
 
 using namespace ez;
 
@@ -107,6 +111,8 @@ class Drive {
   ez::slew slew_swing_forward;
   ez::slew slew_swing_backward;
   ez::slew slew_swing;
+
+  gheese::OdomSensors sensors;
 
   /**
    * Sets constants for slew for turns.  Slew ramps up the speed of the robot until the set distance is traveled.
@@ -249,7 +255,7 @@ class Drive {
    * \param ratio
    *        External gear ratio, wheel gear / motor gear.
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, gheese::OdomSensors sensors);
 
   /**
    * Creates a Drive Controller using encoders plugged into the brain.
@@ -270,8 +276,10 @@ class Drive {
    *        Input {1, 2}.  Make ports negative if reversed!
    * \param right_tracker_ports
    *        Input {3, 4}.  Make ports negative if reversed!
+   * \param senosrs
+            odometry sensors
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, gheese::OdomSensors sensors);
 
   /**
    * Creates a Drive Controller using encoders plugged into a 3 wire expander.
@@ -294,8 +302,10 @@ class Drive {
    *        Input {3, 4}.  Make ports negative if reversed!
    * \param expander_smart_port
    *        Port the expander is plugged into.
+   * \param sensors
+            odom sensors
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port, gheese::OdomSensors sensors);
 
   /**
    * Creates a Drive Controller using rotation sensors.
@@ -314,8 +324,10 @@ class Drive {
    *        Make ports negative if reversed!
    * \param right_tracker_port
    *        Make ports negative if reversed!
+   * \param sensors
+            odom sensors
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ratio, int left_rotation_port, int right_rotation_port);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ratio, int left_rotation_port, int right_rotation_port, gheese::OdomSensors sensors);
 
   /**
    * Sets drive defaults.
@@ -1457,5 +1469,19 @@ class Drive {
    * Boolean to flip which side is the front of the robot for driver control.
    */
   bool is_reversed = false;
+
+  // odom stuff here
+  /**
+  * @brief get position of the robot
+  *
+  * @param radians returns pos in radians if true
+  * @return position of the robot
+  */
+  gheese::Pos get_pos (bool radians = false);
+  /**
+  * @brief print position of the robot through terminal
+  *
+  */
+  void print_pos ();
 };
 };  // namespace ez

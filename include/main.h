@@ -35,6 +35,9 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "EZ-Template/odom/odom.hpp"
+#include "EZ-Template/odom/pos.hpp"
+#include "EZ-Template/odom/tracking_wheel.hpp" 
 
 /**
  * You should add more #includes here
@@ -45,6 +48,9 @@
 
 // More includes here...
 #include "autons.hpp"
+
+
+
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

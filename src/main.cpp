@@ -1,10 +1,20 @@
 #include "main.h"
+#include "EZ-Template/odom/odom.hpp"
+#include "EZ-Template/odom/tracking_wheel.hpp"
 
 /////
 // For installation, upgrading, documentations and tutorials, check out our website!
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
+pros::Imu imu(2);
+pros::Rotation horizontal_track(15, true);
+// 3" offset, behind tracking center (negative)
+gheese::TrackingWheel horizontal (&horizontal_track, 2.75, -3);
+pros::Rotation vertical_track(15, true);
+// 3" offset, infront tracking center 
+gheese::TrackingWheel vertical (&vertical_track, 2.75, 3);
+gheese::OdomSensors sensors (&vertical, &horizontal, &imu);
 
 // Chassis constructor
 ez::Drive chassis (
@@ -30,6 +40,9 @@ ez::Drive chassis (
   // eg. if your drive is 60:36 where the 36t is powered, your RATIO would be 60/36 which is 0.6
   // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 36/60 which is 0.6
   ,1.6667
+
+  // odom sensors struct 
+  ,sensors
 );
 
 

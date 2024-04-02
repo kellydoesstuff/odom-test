@@ -4,15 +4,13 @@
 #include "EZ-Template/util.hpp"
 #include <math.h>
 #include "pros/rtos.hpp"
+#include "EZ-Template/drive/drive.hpp"
 
 /**
  * @brief Struct containing all the sensors used for odometry
  *
  */
-gheese::OdomSensors::OdomSensors (gheese::TrackingWheel* vertical, gheese::TrackingWheel* horizontal, pros::Imu* imu)
-        : vertical(vertical),
-          horizontal(horizontal),
-          imu(imu){}
+
 
 // task that updates pos
 pros::Task* tracking_task = nullptr;
@@ -27,6 +25,40 @@ float prev_vert {0};
 float prev_horiz {0};
 float prev_imu {0};
 
+
+/**
+* @brief set sensors for odometry
+*
+*/
+void set_sensors(gheese::OdomSensors sensors) {
+    odom_sensors = sensors;
+}
+/**
+* @brief get position of robot
+*
+* @param radians true for theta in radians, false for degrees. false by default
+* @return pos
+*/
+gheese::Pos get_pos (bool radians = false) {
+    if (radians) return odom_pos;
+    else return gheese::Pos(odom_pos.x, odom_pos.y, gheese::rad_to_deg(odom_pos.theta));
+}
+
+/**
+* @brief Set the Pose of the robot
+*
+* @param pose the new pose
+* @param radians true if theta is in radians, false if in degrees. False by default
+*/
+void gheese::set_pos(Pos pos, bool radians) {
+    if (radians) odom_pos = pos;
+    else odom_pos = gheese::Pos(pos.x, pos.y, deg_to_rad((pos.theta)));
+}
+
+/**
+* @brief Update the pose of the robot
+*
+*/
 void gheese::update() {
     float vert_raw{};
     float horiz_raw{};
@@ -75,6 +107,10 @@ void gheese::update() {
      
 }
 
+/**
+* @brief initialize the odometry system
+*
+*/
 void gheese::init() {
     if (tracking_task == nullptr) {
         tracking_task = new pros::Task {[=] {

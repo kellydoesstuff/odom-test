@@ -115,4 +115,12 @@ namespace gheese {
  * @return radians
 */
 float deg_to_rad (float deg);
+/**
+ * @brief converts radians to degrees
+ *
+ * @param rad radian being converted
+ * @return degrees
+*/
+float rad_to_deg(float rad);
+
 }

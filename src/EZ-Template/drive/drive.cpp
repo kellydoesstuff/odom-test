@@ -3,11 +3,12 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-
+#pragma once
 #include "drive.hpp"
 
 #include <list>
 
+#include "EZ-Template/odom/odom.hpp"
 #include "main.h"
 #include "okapi/api/units/QAngle.hpp"
 #include "pros/llemu.hpp"
@@ -15,14 +16,20 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 using namespace ez;
 
+gheese::OdomSensors::OdomSensors (gheese::TrackingWheel* vertical, gheese::TrackingWheel* horizontal, pros::Imu* imu)
+        : vertical(vertical),
+          horizontal(horizontal),
+          imu(imu){}
+
 // Constructor for integrated encoders
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
-             int imu_port, double wheel_diameter, double ticks, double ratio)
+             int imu_port, double wheel_diameter, double ticks, double ratio, gheese::OdomSensors sensors)
     : imu(imu_port),
       left_tracker(-1, -1, false),   // Default value
       right_tracker(-1, -1, false),  // Default value
       left_rotation(-1),
       right_rotation(-1),
+      sensors(sensors),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_INTEGRATED;
 
@@ -48,12 +55,13 @@ Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_por
 // Constructor for tracking wheels plugged into the brain
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
              int imu_port, double wheel_diameter, double ticks, double ratio,
-             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports)
+             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, gheese::OdomSensors sensors)
     : imu(imu_port),
       left_tracker(abs(left_tracker_ports[0]), abs(left_tracker_ports[1]), util::reversed_active(left_tracker_ports[0])),
       right_tracker(abs(right_tracker_ports[0]), abs(right_tracker_ports[1]), util::reversed_active(right_tracker_ports[0])),
       left_rotation(-1),
       right_rotation(-1),
+      sensors(sensors),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_ADI_ENCODER;
 
@@ -79,12 +87,13 @@ Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_por
 // Constructor for tracking wheels plugged into a 3 wire expander
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
              int imu_port, double wheel_diameter, double ticks, double ratio,
-             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port)
+             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port, gheese::OdomSensors sensors)
     : imu(imu_port),
       left_tracker({expander_smart_port, abs(left_tracker_ports[0]), abs(left_tracker_ports[1])}, util::reversed_active(left_tracker_ports[0])),
       right_tracker({expander_smart_port, abs(right_tracker_ports[0]), abs(right_tracker_ports[1])}, util::reversed_active(right_tracker_ports[0])),
       left_rotation(-1),
       right_rotation(-1),
+      sensors(sensors),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_ADI_ENCODER;
 
@@ -110,11 +119,12 @@ Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_por
 // Constructor for rotation sensors
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
              int imu_port, double wheel_diameter, double ratio,
-             int left_rotation_port, int right_rotation_port)
+             int left_rotation_port, int right_rotation_port, gheese::OdomSensors sensors)
     : imu(imu_port),
       left_tracker(-1, -1, false),   // Default value
       right_tracker(-1, -1, false),  // Default value
       left_rotation(abs(left_rotation_port)),
+      sensors(sensors),
       right_rotation(abs(right_rotation_port)),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_ROTATION;
@@ -341,6 +351,10 @@ void Drive::initialize() {
   opcontrol_curve_sd_initialize();
   drive_imu_calibrate();
   drive_sensor_reset();
+  sensors.horizontal->reset();
+  sensors.vertical->reset();
+  gheese::set_sensors(sensors);
+  gheese::init();
 }
 
 void Drive::pid_drive_toggle(bool toggle) { drive_toggle = toggle; }
@@ -401,4 +415,10 @@ void Drive::slew_swing_constants_forward_set(okapi::QAngle distance, int min_spe
 void Drive::slew_swing_constants_set(okapi::QAngle distance, int min_speed) {
   slew_swing_constants_forward_set(distance, min_speed);
   slew_swing_constants_backward_set(distance, min_speed);
+}
+
+gheese::Pos Drive::get_pos (bool radians) {
+    gheese::Pos pose {gheese::get_pos(true)};
+    if (!radians) pose.theta = gheese::rad_to_deg(pose.theta);
+    return pose;
 }
