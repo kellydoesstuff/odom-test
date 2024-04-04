@@ -30,16 +30,16 @@ ez::Drive chassis (
   ,7
 
   // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
-  ,3.25
+  ,4.125
 
   // Cartridge RPM
-  ,600
+  ,200
 
   // External Gear Ratio (MUST BE DECIMAL) This is WHEEL GEAR / MOTOR GEAR
   // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 84/36 which is 2.333
   // eg. if your drive is 60:36 where the 36t is powered, your RATIO would be 60/36 which is 0.6
   // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 36/60 which is 0.6
-  ,1.6667
+  ,1
 
   // odom sensors struct 
   ,sensors
@@ -60,7 +60,7 @@ void initialize() {
   pros::delay(500); // Stop the user from doing anything while legacy ports configure
 
   // Configure your chassis controls
-  chassis.opcontrol_curve_buttons_toggle(true); // Enables modifying the controller curve with buttons on the joysticks
+  chassis.opcontrol_curve_buttons_toggle(false); // Enables modifying the controller curve with buttons on the joysticks
   chassis.opcontrol_drive_activebrake_set(0); // Sets the active brake kP. We recommend 0.1.
   chassis.opcontrol_curve_default_set(0, 0); // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)  
   default_constants(); // Set the drive to your own constants from autons.cpp!
@@ -70,19 +70,20 @@ void initialize() {
   // chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y,    pros::E_CONTROLLER_DIGITAL_A);
 
   // Autonomous Selector using LLEMU
-  ez::as::auton_selector.autons_add({
-    Auton("Example Drive\n\nDrive forward and come back.", drive_example),
-    Auton("Example Turn\n\nTurn 3 times.", turn_example),
-    Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
-    Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
-    Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
-    Auton("Combine all 3 movements", combining_movements),
-    Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
-  });
+  // ez::as::auton_selector.autons_add({
+  //   Auton("Example Drive\n\nDrive forward and come back.", drive_example),
+  //   Auton("Example Turn\n\nTurn 3 times.", turn_example),
+  //   Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
+  //   Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
+  //   Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
+  //   Auton("Combine all 3 movements", combining_movements),
+  //   Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
+  // });
 
   // Initialize chassis and auton selector
   chassis.initialize();
-  ez::as::initialize();
+  pros::lcd::initialize();
+  // ez::as::initialize();
   master.rumble(".");
 }
 
@@ -172,8 +173,8 @@ void opcontrol() {
       chassis.pid_tuner_iterate(); // Allow PID Tuner to iterate
     } 
 
-    chassis.opcontrol_tank(); // Tank control
-    // chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
+    // chassis.opcontrol_tank(); // Tank control
+    chassis.opcontrol_arcade_standard(ez::SPLIT); // Standard split arcade
     // chassis.opcontrol_arcade_standard(ez::SINGLE); // Standard single arcade
     // chassis.opcontrol_arcade_flipped(ez::SPLIT); // Flipped split arcade
     // chassis.opcontrol_arcade_flipped(ez::SINGLE); // Flipped single arcade
@@ -181,6 +182,7 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
+    chassis.print_pos();
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }

@@ -417,8 +417,23 @@ void Drive::slew_swing_constants_set(okapi::QAngle distance, int min_speed) {
   slew_swing_constants_backward_set(distance, min_speed);
 }
 
+/**
+  * @brief get position of the robot
+  *
+  * @param radians returns pos in radians if true
+  * @return position of the robot
+*/
 gheese::Pos Drive::get_pos (bool radians) {
-    gheese::Pos pose {gheese::get_pos(true)};
-    if (!radians) pose.theta = gheese::rad_to_deg(pose.theta);
-    return pose;
+  gheese::Pos pose {gheese::get_pos(true)};
+  if (!radians) pose.theta = gheese::rad_to_deg(pose.theta);
+  return pose;
+}
+/**
+* @brief print position of the robot through terminal
+*
+*/
+void Drive::print_pos () {
+  pros::lcd::print(0, "X: %f", chassis.get_pos().x); // x
+  pros::lcd::print(1, "Y: %f", chassis.get_pos().y); // y
+  pros::lcd::print(2, "Theta: %f", chassis.get_pos().theta); // heading
 }

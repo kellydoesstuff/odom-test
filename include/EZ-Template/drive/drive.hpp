@@ -1305,6 +1305,20 @@ class Drive {
    */
   double pid_tuner_increment_start_i_get();
 
+  // odom stuff here
+  /**
+  * @brief get position of the robot
+  *
+  * @param radians returns pos in radians if true
+  * @return position of the robot
+  */
+  gheese::Pos get_pos (bool radians = false);
+  /**
+  * @brief print position of the robot through terminal
+  *
+  */
+  void print_pos ();
+
  private:  // !Auton
   bool drive_toggle = true;
   bool print_toggle = true;
@@ -1470,18 +1484,6 @@ class Drive {
    */
   bool is_reversed = false;
 
-  // odom stuff here
-  /**
-  * @brief get position of the robot
-  *
-  * @param radians returns pos in radians if true
-  * @return position of the robot
-  */
-  gheese::Pos get_pos (bool radians = false);
-  /**
-  * @brief print position of the robot through terminal
-  *
-  */
-  void print_pos ();
+  
 };
 };  // namespace ez
