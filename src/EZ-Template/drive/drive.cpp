@@ -4,12 +4,13 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 #pragma once
-#include "drive.hpp"
+#include "EZ-Template/drive/drive.hpp"
 
 #include <list>
 
 #include "EZ-Template/odom/odom.hpp"
 #include "main.h"
+#include "odom/pos.hpp"
 #include "okapi/api/units/QAngle.hpp"
 #include "pros/llemu.hpp"
 #include "pros/screen.hpp"
@@ -436,4 +437,11 @@ void Drive::print_pos () {
   pros::lcd::print(0, "X: %f", chassis.get_pos().x); // x
   pros::lcd::print(1, "Y: %f", chassis.get_pos().y); // y
   pros::lcd::print(2, "Theta: %f", chassis.get_pos().theta); // heading
+}
+
+void Drive::move_to_point (float x, float y, int timeout) {
+  gheese::Pos last_pos = get_pos();
+  gheese::Pos target(x,y);
+  target.theta = last_pos.angle(target);
+  
 }

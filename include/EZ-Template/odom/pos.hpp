@@ -37,6 +37,7 @@ class Pos {
          */
         float angle(Pos other);
         
+        
 
 };
 }

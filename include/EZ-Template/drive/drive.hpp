@@ -1318,6 +1318,16 @@ class Drive {
   *
   */
   void print_pos ();
+  /**
+  * @brief move robot to point
+  *
+  * @param x x coord
+  * @param y y coord
+  * @param timeout longest time robot can spend in the command
+  * 
+  */
+  void move_to_point (float x, float y, int timeout);
+
 
  private:  // !Auton
   bool drive_toggle = true;
