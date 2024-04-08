@@ -10,7 +10,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "EZ-Template/odom/odom.hpp"
 #include "main.h"
-#include "odom/pos.hpp"
+#include "EZ-Template/odom/pos.hpp"
 #include "okapi/api/units/QAngle.hpp"
 #include "pros/llemu.hpp"
 #include "pros/screen.hpp"
