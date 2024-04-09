@@ -39,7 +39,7 @@ void set_sensors(gheese::OdomSensors sensors) {
 * @param radians true for theta in radians, false for degrees. false by default
 * @return pos
 */
-gheese::Pos get_pos (bool radians = false) {
+gheese::Pos gheese::get_pos (bool radians) {
     if (radians) return odom_pos;
     else return gheese::Pos(odom_pos.x, odom_pos.y, gheese::rad_to_deg(odom_pos.theta));
 }
