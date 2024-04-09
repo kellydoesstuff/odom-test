@@ -439,9 +439,4 @@ void Drive::print_pos () {
   pros::lcd::print(2, "Theta: %f", chassis.get_pos().theta); // heading
 }
 
-void Drive::move_to_point (float x, float y, int timeout) {
-  gheese::Pos last_pos = get_pos();
-  gheese::Pos target(x,y);
-  target.theta = last_pos.angle(target);
-  
-}
+

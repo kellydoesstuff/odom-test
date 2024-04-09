@@ -128,3 +128,10 @@ void Drive::swing_pid_task() {
     }
   }
 }
+
+void Drive::move_to_point (float x, float y, int timeout) {
+  gheese::Pos last_pos {gheese::get_pos()};
+  gheese::Pos target{x,y};
+  target.theta = last_pos.angle(target);
+  
+}
