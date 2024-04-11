@@ -111,13 +111,13 @@ void gheese::update() {
 * @brief initialize the odometry system
 *
 */
-void gheese::init() {
-    if (tracking_task == nullptr) {
-        tracking_task = new pros::Task {[=] {
-            while (true) {
-                update();
-                pros::delay(10);
-            }
-        }};
-    }
-}
+// void gheese::init() {
+//     if (tracking_task == nullptr) {
+//         tracking_task = new pros::Task {[=] {
+//             while (true) {
+//                 update();
+//                 pros::delay(10);
+//             }
+//         }};
+//     }
+// }

@@ -33,7 +33,7 @@ void set_sensors(gheese::OdomSensors sensors);
 * @brief initialize the odometry system
 *
 */
-void init();
+// void init();
 /**
 * @brief get position of robot
 *

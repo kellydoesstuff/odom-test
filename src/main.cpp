@@ -81,8 +81,8 @@ void initialize() {
   // });
 
   // Initialize chassis and auton selector
-  chassis.initialize();
   pros::lcd::initialize();
+  chassis.initialize();
   // ez::as::initialize();
   master.rumble(".");
 }

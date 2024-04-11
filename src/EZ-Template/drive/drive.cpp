@@ -355,7 +355,6 @@ void Drive::initialize() {
   sensors.horizontal->reset();
   sensors.vertical->reset();
   gheese::set_sensors(sensors);
-  gheese::init();
 }
 
 void Drive::pid_drive_toggle(bool toggle) { drive_toggle = toggle; }

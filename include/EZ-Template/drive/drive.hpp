@@ -1326,8 +1326,10 @@ class Drive {
   * @param timeout longest time robot can spend in the command
   * 
   */
-  void move_to_point (float x, float y, int timeout);
+  void point_pid_task ();
 
+  bool odom_enable = true;
+  std::vector<gheese::Pos> target_point;
 
  private:  // !Auton
   bool drive_toggle = true;

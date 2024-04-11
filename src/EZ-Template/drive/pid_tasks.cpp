@@ -6,18 +6,22 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "EZ-Template/api.hpp"
 #include "pros/misc.hpp"
+#include "EZ-Template/util.hpp"
 
 using namespace ez;
 
 void Drive::ez_auto_task() {
   while (true) {
     // Autonomous PID
+    if (odom_enable) gheese::update();
     if (drive_mode_get() == DRIVE)
       drive_pid_task();
     else if (drive_mode_get() == TURN)
       turn_pid_task();
     else if (drive_mode_get() == SWING)
       swing_pid_task();
+    else if (drive_mode_get() == PTP)
+      point_pid_task();
 
     util::AUTON_RAN = drive_mode_get() != DISABLE ? true : false;
 
@@ -129,9 +133,9 @@ void Drive::swing_pid_task() {
   }
 }
 
-void Drive::move_to_point (float x, float y, int timeout) {
+void Drive::point_pid_task () {
   gheese::Pos last_pos {gheese::get_pos()};
-  gheese::Pos target{x,y};
-  target.theta = last_pos.angle(target);
+  gheese::Pos target_pos {target_point.at(0).x, target_point.at(1).y};
+  double forward_error {gheese::hypot(last_pos, target_pos)};
   
 }

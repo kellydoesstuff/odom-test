@@ -1,9 +1,10 @@
 bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp \
- include/EZ-Template/util.hpp include/api.h include/pros/adi.h \
- include/pros/colors.h include/pros/distance.h include/pros/error.h \
- include/pros/ext_adi.h include/pros/adi.h include/pros/adi.h \
- include/pros/gps.h include/pros/imu.h include/pros/link.h \
- include/pros/llemu.h include/display/lvgl.h include/display/lv_version.h \
+ include/EZ-Template/util.hpp include/EZ-Template/odom/pos.hpp \
+ include/api.h include/pros/adi.h include/pros/colors.h \
+ include/pros/distance.h include/pros/error.h include/pros/ext_adi.h \
+ include/pros/adi.h include/pros/adi.h include/pros/gps.h \
+ include/pros/imu.h include/pros/link.h include/pros/llemu.h \
+ include/display/lvgl.h include/display/lv_version.h \
  include/display/lv_misc/lv_log.h include/display/lv_conf.h \
  include/display/lv_conf_checker.h include/display/lv_misc/lv_task.h \
  include/display/lv_misc/lv_mem.h include/display/lv_misc/lv_log.h \
@@ -77,7 +78,6 @@ bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp \
  include/pros/screen.hpp include/pros/screen.h include/pros/vision.hpp \
  include/pros/vision.h include/pros/link.hpp include/pros/link.h \
  include/main.h include/api.h include/EZ-Template/odom/odom.hpp \
- include/EZ-Template/odom/pos.hpp \
  include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
  include/pros/imu.hpp include/EZ-Template/api.hpp \
  include/EZ-Template/PID.hpp include/EZ-Template/auton.hpp \
@@ -88,6 +88,7 @@ bin/EZ-Template/util.cpp.o: src/EZ-Template/util.cpp \
  include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp \
  include/autons.hpp
 include/EZ-Template/util.hpp:
+include/EZ-Template/odom/pos.hpp:
 include/api.h:
 include/pros/adi.h:
 include/pros/colors.h:
@@ -243,7 +244,6 @@ include/pros/link.h:
 include/main.h:
 include/api.h:
 include/EZ-Template/odom/odom.hpp:
-include/EZ-Template/odom/pos.hpp:
 include/EZ-Template/odom/tracking_wheel.hpp:
 include/pros/rotation.hpp:
 include/pros/imu.hpp:

@@ -9,6 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <bits/stdc++.h>
 #include <stdio.h>
 #include <string.h>
+#include "odom/pos.hpp"
 
 #include "api.h"
 
@@ -69,7 +70,8 @@ enum exit_output { RUNNING = 1,
 enum e_mode { DISABLE = 0,
               SWING = 1,
               TURN = 2,
-              DRIVE = 3 };
+              DRIVE = 3,
+              PTP = 4};
 
 /**
  * Outputs string for exit_condition enum.
@@ -122,5 +124,12 @@ float deg_to_rad (float deg);
  * @return degrees
 */
 float rad_to_deg(float rad);
-
+/**
+ * @brief finds hypot from point to point
+ *
+ * @param point1 first point
+ * @param point2 second point
+ * @return distance in i ches
+*/
+double hypot(gheese::Pos point1, gheese::Pos point2);
 }

@@ -153,4 +153,11 @@ namespace gheese {
 
 float deg_to_rad(float deg) {return deg * M_PI / 180;}
 float rad_to_deg(float rad) {return rad * 180 / M_PI;}
+
+double hypot (gheese::Pos point1, gheese::Pos point2){
+  double sum = std::pow(point2.x- point1.x,2) + std::pow(point2.y - point1.y,2);
+  double result = std::sqrt(sum);
+  return result;
+}
+
 }
