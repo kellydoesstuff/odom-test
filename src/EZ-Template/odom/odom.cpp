@@ -5,7 +5,7 @@
 #include <math.h>
 #include "pros/rtos.hpp"
 #include "EZ-Template/drive/drive.hpp"
-
+#include "main.h"
 /**
  * @brief Struct containing all the sensors used for odometry
  *
@@ -104,6 +104,8 @@ void gheese::update() {
     odom_pos.x += local_x * -cos(avg_heading);
     odom_pos.y += local_x * sin(avg_heading);
     odom_pos.theta = heading;
+
+    chassis.print_pos();
      
 }
 

@@ -182,7 +182,7 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
-    chassis.print_pos();
+    // chassis.print_pos();
 
     pros::delay(ez::util::DELAY_TIME); // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
