@@ -1,4 +1,6 @@
+#include "EZ-Template/sdcard.hpp"
 #include "main.h"
+#include "EZ-Template/odom/odom.hpp"
 
 /////
 // For installation, upgrading, documentations and tutorials, check out our website!
@@ -10,6 +12,8 @@ const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 90;
 
+// pros::Task print_task(gheese::print_pos);
+pros::Task tracking_task(&gheese::update);
 ///
 // Constants
 ///
@@ -36,14 +40,15 @@ void drive_example() {
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater then the slew distance + a few inches
 
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
+  // chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
+  // chassis.pid_wait();
 
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait();
+  // chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  // chassis.pid_wait();
 
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait();
+  // chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  // chassis.pid_wait();
+  // ez::as::shutdown();
 }
 
 ///

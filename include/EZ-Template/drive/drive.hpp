@@ -112,7 +112,7 @@ class Drive {
   ez::slew slew_swing_backward;
   ez::slew slew_swing;
 
-  gheese::OdomSensors sensors;
+  // gheese::OdomSensors sensors;
 
   /**
    * Sets constants for slew for turns.  Slew ramps up the speed of the robot until the set distance is traveled.
@@ -255,7 +255,7 @@ class Drive {
    * \param ratio
    *        External gear ratio, wheel gear / motor gear.
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, gheese::OdomSensors sensors);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio);
 
   /**
    * Creates a Drive Controller using encoders plugged into the brain.
@@ -276,10 +276,9 @@ class Drive {
    *        Input {1, 2}.  Make ports negative if reversed!
    * \param right_tracker_ports
    *        Input {3, 4}.  Make ports negative if reversed!
-   * \param senosrs
-            odometry sensors
+  
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, gheese::OdomSensors sensors);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports);
 
   /**
    * Creates a Drive Controller using encoders plugged into a 3 wire expander.
@@ -305,7 +304,7 @@ class Drive {
    * \param sensors
             odom sensors
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port, gheese::OdomSensors sensors);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ticks, double ratio, std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port);
 
   /**
    * Creates a Drive Controller using rotation sensors.
@@ -327,7 +326,7 @@ class Drive {
    * \param sensors
             odom sensors
    */
-  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ratio, int left_rotation_port, int right_rotation_port, gheese::OdomSensors sensors);
+  Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports, int imu_port, double wheel_diameter, double ratio, int left_rotation_port, int right_rotation_port);
 
   /**
    * Sets drive defaults.
@@ -1313,11 +1312,6 @@ class Drive {
   * @return position of the robot
   */
   gheese::Pos get_pos (bool radians = false);
-  /**
-  * @brief print position of the robot through terminal
-  *
-  */
-  void print_pos ();
   /**
   * @brief move robot to point
   *

@@ -4,9 +4,9 @@
 namespace gheese {
 class Pos {
     public:
-        float x{};
-        float y{};
-        float theta{};
+        float x{0};
+        float y{0};
+        float theta{0};
         /**
          * @brief initialize new pos
          *

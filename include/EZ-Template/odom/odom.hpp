@@ -53,5 +53,11 @@ void set_pos(Pos pos, bool radians = false);
 *
 */
 void update();
+/**
+* @brief print position of the robot through brain
+*
+*/
+void print_pos ();
+
 
 }

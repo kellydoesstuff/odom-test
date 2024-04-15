@@ -7,14 +7,14 @@
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
-pros::Imu imu(2);
-pros::Rotation horizontal_track(15, true);
-// 3" offset, behind tracking center (negative)
-gheese::TrackingWheel horizontal (&horizontal_track, 2.75, -3);
-pros::Rotation vertical_track(15, true);
-// 3" offset, infront tracking center 
-gheese::TrackingWheel vertical (&vertical_track, 2.75, 3);
-gheese::OdomSensors sensors (&vertical, &horizontal, &imu);
+// pros::Imu imu(2);
+// pros::Rotation horizontal_track(15, true);
+// // 3" offset, behind tracking center (negative)
+// gheese::TrackingWheel horizontal (&horizontal_track, 2.75, -3);
+// pros::Rotation vertical_track(15, true);
+// // 3" offset, infront tracking center 
+// gheese::TrackingWheel vertical (&vertical_track, 2.75, 3);
+// gheese::OdomSensors sensors (&vertical, &horizontal, &imu);
 
 // Chassis constructor
 ez::Drive chassis (
@@ -42,7 +42,7 @@ ez::Drive chassis (
   ,1
 
   // odom sensors struct 
-  ,sensors
+  // ,sensors
 );
 
 
@@ -70,15 +70,15 @@ void initialize() {
   // chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y,    pros::E_CONTROLLER_DIGITAL_A);
 
   // Autonomous Selector using LLEMU
-  // ez::as::auton_selector.autons_add({
-  //   Auton("Example Drive\n\nDrive forward and come back.", drive_example),
-  //   Auton("Example Turn\n\nTurn 3 times.", turn_example),
-  //   Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
-  //   Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
-  //   Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
-  //   Auton("Combine all 3 movements", combining_movements),
-  //   Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
-  // });
+  ez::as::auton_selector.autons_add({
+    Auton("Example Drive\n\nDrive forward and come back.", drive_example),
+    Auton("Example Turn\n\nTurn 3 times.", turn_example),
+    Auton("Drive and Turn\n\nDrive forward, turn, come back. ", drive_and_turn),
+    Auton("Drive and Turn\n\nSlow down during drive.", wait_until_change_speed),
+    Auton("Swing Example\n\nSwing in an 'S' curve", swing_example),
+    Auton("Combine all 3 movements", combining_movements),
+    Auton("Interference\n\nAfter driving forward, robot performs differently if interfered or not.", interfered_example),
+  });
 
   // Initialize chassis and auton selector
   pros::lcd::initialize();

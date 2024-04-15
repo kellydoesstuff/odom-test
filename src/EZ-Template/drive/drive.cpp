@@ -24,13 +24,13 @@ gheese::OdomSensors::OdomSensors (gheese::TrackingWheel* vertical, gheese::Track
 
 // Constructor for integrated encoders
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
-             int imu_port, double wheel_diameter, double ticks, double ratio, gheese::OdomSensors sensors)
+             int imu_port, double wheel_diameter, double ticks, double ratio)
     : imu(imu_port),
       left_tracker(-1, -1, false),   // Default value
       right_tracker(-1, -1, false),  // Default value
       left_rotation(-1),
       right_rotation(-1),
-      sensors(sensors),
+      // sensors(sensors),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_INTEGRATED;
 
@@ -56,13 +56,12 @@ Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_por
 // Constructor for tracking wheels plugged into the brain
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
              int imu_port, double wheel_diameter, double ticks, double ratio,
-             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, gheese::OdomSensors sensors)
+             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports)
     : imu(imu_port),
       left_tracker(abs(left_tracker_ports[0]), abs(left_tracker_ports[1]), util::reversed_active(left_tracker_ports[0])),
       right_tracker(abs(right_tracker_ports[0]), abs(right_tracker_ports[1]), util::reversed_active(right_tracker_ports[0])),
       left_rotation(-1),
       right_rotation(-1),
-      sensors(sensors),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_ADI_ENCODER;
 
@@ -88,13 +87,13 @@ Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_por
 // Constructor for tracking wheels plugged into a 3 wire expander
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
              int imu_port, double wheel_diameter, double ticks, double ratio,
-             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port, gheese::OdomSensors sensors)
+             std::vector<int> left_tracker_ports, std::vector<int> right_tracker_ports, int expander_smart_port)
     : imu(imu_port),
       left_tracker({expander_smart_port, abs(left_tracker_ports[0]), abs(left_tracker_ports[1])}, util::reversed_active(left_tracker_ports[0])),
       right_tracker({expander_smart_port, abs(right_tracker_ports[0]), abs(right_tracker_ports[1])}, util::reversed_active(right_tracker_ports[0])),
       left_rotation(-1),
       right_rotation(-1),
-      sensors(sensors),
+      // sensors(sensors),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_ADI_ENCODER;
 
@@ -120,12 +119,12 @@ Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_por
 // Constructor for rotation sensors
 Drive::Drive(std::vector<int> left_motor_ports, std::vector<int> right_motor_ports,
              int imu_port, double wheel_diameter, double ratio,
-             int left_rotation_port, int right_rotation_port, gheese::OdomSensors sensors)
+             int left_rotation_port, int right_rotation_port)
     : imu(imu_port),
       left_tracker(-1, -1, false),   // Default value
       right_tracker(-1, -1, false),  // Default value
       left_rotation(abs(left_rotation_port)),
-      sensors(sensors),
+      // sensors(sensors),
       right_rotation(abs(right_rotation_port)),
       ez_auto([this] { this->ez_auto_task(); }) {
   is_tracker = DRIVE_ROTATION;
@@ -352,9 +351,9 @@ void Drive::initialize() {
   opcontrol_curve_sd_initialize();
   drive_imu_calibrate();
   drive_sensor_reset();
-  sensors.horizontal->reset();
-  sensors.vertical->reset();
-  gheese::set_sensors(sensors);
+  // sensors.horizontal->reset();
+  // sensors.vertical->reset();
+  // gheese::set_sensors(sensors);
 }
 
 void Drive::pid_drive_toggle(bool toggle) { drive_toggle = toggle; }
@@ -428,14 +427,6 @@ gheese::Pos Drive::get_pos (bool radians) {
   if (!radians) pose.theta = gheese::rad_to_deg(pose.theta);
   return pose;
 }
-/**
-* @brief print position of the robot through terminal
-*
-*/
-void Drive::print_pos () {
-  pros::lcd::print(0, "X: %f", chassis.get_pos().x); // x
-  pros::lcd::print(1, "Y: %f", chassis.get_pos().y); // y
-  pros::lcd::print(2, "Theta: %f", chassis.get_pos().theta); // heading
-}
+
 
 

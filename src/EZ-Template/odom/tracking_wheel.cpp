@@ -17,7 +17,7 @@ gheese::TrackingWheel::TrackingWheel (pros::Rotation* tracker, float diameter, f
  * @brief resets the rotation sensor to 0
 */
 void gheese::TrackingWheel::reset() {
-    this->rotation->reset_position();
+    if (this->rotation != nullptr) this->rotation->reset_position();
 }
 
 /**
@@ -25,7 +25,10 @@ void gheese::TrackingWheel::reset() {
  *
  * @return float distance traveled in inches
 */
-float gheese::TrackingWheel::get_distance_traveled() { return (float(this->rotation->get_position()) * this->diameter * M_PI / 36000); }
+float gheese::TrackingWheel::get_distance_traveled() { 
+    if (this->rotation != nullptr) 
+    return (float(this->rotation->get_position()) * this->diameter * M_PI / 36000); 
+}
 
 /**
  * @brief get offset of wheel from tracking center
