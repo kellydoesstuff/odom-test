@@ -84,8 +84,9 @@ bin/EZ-Template/drive/pid_tasks.cpp.o: \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
  include/EZ-Template/odom/odom.hpp \
  include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
- include/pros/imu.hpp include/EZ-Template/piston.hpp \
- include/EZ-Template/sdcard.hpp include/pros/misc.hpp
+ include/pros/motors.hpp include/pros/imu.hpp \
+ include/EZ-Template/piston.hpp include/EZ-Template/sdcard.hpp \
+ include/pros/misc.hpp
 include/EZ-Template/api.hpp:
 include/EZ-Template/PID.hpp:
 include/EZ-Template/util.hpp:
@@ -253,6 +254,7 @@ include/okapi/api/units/QTime.hpp:
 include/EZ-Template/odom/odom.hpp:
 include/EZ-Template/odom/tracking_wheel.hpp:
 include/pros/rotation.hpp:
+include/pros/motors.hpp:
 include/pros/imu.hpp:
 include/EZ-Template/piston.hpp:
 include/EZ-Template/sdcard.hpp:

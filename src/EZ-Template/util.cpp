@@ -160,4 +160,16 @@ double hypot (gheese::Pos point1, gheese::Pos point2){
   return result;
 }
 
+/**
+ * @brief Return the average of a vector of numbers
+ *
+ * @param values
+ * @return float
+ */
+float avg(std::vector<float> values) {
+    float sum = 0;
+    for (float value : values) { sum += value; }
+    return sum / values.size();
+}
+
 }

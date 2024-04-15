@@ -83,8 +83,8 @@ bin/EZ-Template/drive/pto.cpp.o: src/EZ-Template/drive/pto.cpp \
  include/okapi/api/units/QLength.hpp include/okapi/api/units/QTime.hpp \
  include/EZ-Template/odom/odom.hpp \
  include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
- include/pros/imu.hpp include/main.h include/api.h \
- include/EZ-Template/api.hpp include/EZ-Template/auton.hpp \
+ include/pros/motors.hpp include/pros/imu.hpp include/main.h \
+ include/api.h include/EZ-Template/api.hpp include/EZ-Template/auton.hpp \
  include/EZ-Template/auton_selector.hpp include/EZ-Template/piston.hpp \
  include/EZ-Template/sdcard.hpp include/autons.hpp
 include/EZ-Template/drive/drive.hpp:
@@ -251,6 +251,7 @@ include/okapi/api/units/QTime.hpp:
 include/EZ-Template/odom/odom.hpp:
 include/EZ-Template/odom/tracking_wheel.hpp:
 include/pros/rotation.hpp:
+include/pros/motors.hpp:
 include/pros/imu.hpp:
 include/main.h:
 include/api.h:

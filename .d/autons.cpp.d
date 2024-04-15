@@ -80,7 +80,7 @@ bin/autons.cpp.o: src/autons.cpp include/EZ-Template/sdcard.hpp \
  include/main.h include/api.h include/EZ-Template/odom/odom.hpp \
  include/EZ-Template/odom/pos.hpp \
  include/EZ-Template/odom/tracking_wheel.hpp include/pros/rotation.hpp \
- include/pros/imu.hpp include/EZ-Template/api.hpp \
+ include/pros/motors.hpp include/pros/imu.hpp include/EZ-Template/api.hpp \
  include/EZ-Template/PID.hpp include/EZ-Template/util.hpp \
  include/EZ-Template/drive/drive.hpp include/EZ-Template/slew.hpp \
  include/okapi/api/units/QAngle.hpp include/okapi/api/units/RQuantity.hpp \
@@ -247,6 +247,7 @@ include/EZ-Template/odom/odom.hpp:
 include/EZ-Template/odom/pos.hpp:
 include/EZ-Template/odom/tracking_wheel.hpp:
 include/pros/rotation.hpp:
+include/pros/motors.hpp:
 include/pros/imu.hpp:
 include/EZ-Template/api.hpp:
 include/EZ-Template/PID.hpp:

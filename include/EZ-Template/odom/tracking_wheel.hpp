@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pros/rotation.hpp"
+#include "pros/motors.hpp"
 #include <numbers>
 #include <math.h>
 
@@ -11,7 +12,10 @@ class TrackingWheel {
     private:
         float diameter;
         float distance;
+        float rpm;
         pros::Rotation* rotation = nullptr;
+        pros::Motor_Group* motors = nullptr;
+
 
     public:
         /**
@@ -22,6 +26,15 @@ class TrackingWheel {
          * @param distance offset distance to tracking center in inches
          */
         TrackingWheel (pros::Rotation* tracker, float diameter, float distance);
+        /**
+         * @brief initialize new tracking wheel w/ motor groups
+         *
+         * @param motors motor group
+         * @param diameter diameter of wheels on chassis
+         * @param distance half of trackwidth distance in inches
+         * @param rpm rpm of chassis
+         */
+        TrackingWheel (pros::Motor_Group* motors, float diameter, float distance, float rpm);
 
         /**
          * @brief resets the rotation sensor to 0

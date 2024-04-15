@@ -132,4 +132,12 @@ float rad_to_deg(float rad);
  * @return distance in i ches
 */
 double hypot(gheese::Pos point1, gheese::Pos point2);
+
+/**
+ * @brief Return the average of a vector of numbers
+ *
+ * @param values
+ * @return float
+ */
+float avg (std::vector<float> values);
 }
