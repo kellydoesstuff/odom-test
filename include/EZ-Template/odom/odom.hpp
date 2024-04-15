@@ -15,11 +15,13 @@ struct OdomSensors {
         *
         * odom sensors are in a struct for easy initialiation in chassis ez's chassis class
         * @param vertical pointer to the first vertical tracking wheel
+        * @param vertical1 pointer to second tracking wheel
         * @param horizontal pointer to the first horizontal tracking wheel
         * @param imu pointer to the IMU
         */
-        OdomSensors(gheese::TrackingWheel* vertical, gheese::TrackingWheel* horizontal, pros::Imu* imu);
+        OdomSensors(gheese::TrackingWheel* vertical, gheese::TrackingWheel* vertical1, gheese::TrackingWheel* horizontal, pros::Imu* imu);
         TrackingWheel* vertical;
+        TrackingWheel* vertical1;
         TrackingWheel* horizontal;
         pros::Imu* imu;
 };
@@ -58,6 +60,7 @@ void update();
 *
 */
 void print_pos ();
+
 
 
 }

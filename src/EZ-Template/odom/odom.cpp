@@ -31,14 +31,15 @@ pros::MotorGroup rightm_group({right_motor});
 // pros::Rotation vertical_track(3, true);
 // 3" offset, infront tracking center 
 gheese::TrackingWheel vertical (&leftm_group, 4.0, -5.25, 200.0);
-gheese::OdomSensors odom_sensors (&vertical, nullptr, &imu);
+gheese::TrackingWheel vertical1 (&rightm_group, 4.0, 5.25, 200.0);
+gheese::OdomSensors odom_sensors (&vertical, &vertical1, nullptr, &imu);
 // gheese::OdomSensors odom_sensors(nullptr, nullptr, nullptr);
 
 
 
-float prev_vert {0};
-float prev_horiz {0};
-float prev_imu {0};
+float prev_vert {0.0};
+float prev_horiz {0.0};
+float prev_heading {0.0};
 
 
 /**
@@ -96,52 +97,57 @@ void gheese::update() {
     odom_sensors.vertical->reset();
     odom_sensors.imu->reset(true);
     // odom_sensors.imu->set_heading(90);
+    float vert_raw{0.0};
+    float vert1_raw{0.0};
+    float horiz_raw{0.0};
+    float imu_raw{0.0};
     
     while (true) {
-        float vert_raw{0};
-        float horiz_raw{0};
-        float imu_raw{0};
+        
         if (odom_sensors.vertical != nullptr) vert_raw = odom_sensors.vertical->get_distance_traveled();
-        if (odom_sensors.horizontal != nullptr) horiz_raw = odom_sensors.horizontal->get_distance_traveled();
+        if (odom_sensors.vertical1 != nullptr) vert1_raw = odom_sensors.vertical1->get_distance_traveled();
+        vert_raw = gheese::avg({vert_raw,vert1_raw});
+        // if (odom_sensors.horizontal != nullptr) horiz_raw = odom_sensors.horizontal->get_distance_traveled();
         if (odom_sensors.imu != nullptr) imu_raw = gheese::deg_to_rad(odom_sensors.imu->get_rotation());
         // if (odom_sensors.imu != nullptr) imu_raw = imu.get_rotation();
 
         // // calc change in sensors
         float delta_vert = vert_raw - prev_vert;
-        float delta_horiz = horiz_raw - prev_horiz;
-        float delta_imu = imu_raw - prev_imu;
+        float delta_horiz = 0.0;
+        float delta_heading = imu_raw - prev_heading;
 
         // // update prev sensors
         prev_vert = vert_raw;
-        prev_horiz = horiz_raw;
-        prev_imu = imu_raw;
+        // prev_horiz = horiz_raw;
+        prev_heading = imu_raw;
 
         // // calculate heading
-        float heading = odom_pos.theta;
-        if (odom_sensors.imu != nullptr) heading += delta_imu;
-        float delta_heading = heading - odom_pos.theta;
-        float avg_heading = odom_pos.theta + delta_heading /2;
+        // float heading = odom_pos.theta;
+        // if (odom_sensors.imu != nullptr) heading += delta_imu;
+        // float delta_heading = heading - odom_pos.theta;
+        float avg_heading = prev_heading + delta_heading /2.0;
 
         // calculate change in x and y
-        float delta_x = 0;
-        float delta_y = 0;
-        if (odom_sensors.vertical != nullptr) delta_y = vert_raw - prev_vert;
-        if (odom_sensors.horizontal != nullptr) delta_x = horiz_raw - prev_horiz;
-        prev_vert = vert_raw;
-        prev_horiz = horiz_raw;
+        // float delta_x = 0;
+        // float delta_y = 0;
+        // if (odom_sensors.vertical != nullptr) delta_y = vert_raw - prev_vert;
+        // if (odom_sensors.horizontal != nullptr) delta_x = horiz_raw - prev_horiz;
+        // prev_vert = vert_raw;
+        // prev_horiz = horiz_raw;
 
-        float horiz_offset = 0;
+        float horiz_offset = 0.0;
         if (odom_sensors.horizontal != nullptr) horiz_offset = odom_sensors.horizontal->get_offset();
 
         // // calculate local x and y
         float local_x = 0;
         float local_y = 0;
-        if (delta_heading == 0) {
-            local_x = delta_x;
-            local_y = delta_y;
+        if (delta_heading == 0.0) {
+            local_x = delta_vert;
+            local_y = delta_horiz;
         } else {
-            local_x = 2 * sin(delta_heading /2) * (delta_x / delta_heading + horiz_offset);
-            local_y = 2 * sin(delta_heading /2) * (delta_y / delta_heading + odom_sensors.vertical->get_offset());
+            local_x = 2 * sin(delta_heading /2) * (delta_vert / delta_heading);
+            // local_y = 2 * sin(delta_heading /2) * (delta_y / delta_heading + odom_sensors.vertical->get_offset());
+            local_y = 0;
         }
 
         // float local_polar_angle;
@@ -162,11 +168,12 @@ void gheese::update() {
         // odom_pos.y += y_delta;
 
         // calcualte global x and y
-        odom_pos.x += local_y * sin(avg_heading);
+        odom_pos.x += -local_y * sin(avg_heading);
         odom_pos.y += local_y * cos(avg_heading);
-        odom_pos.x += local_x * -cos(avg_heading);
+        // odom_pos.x += local_x * -cos(avg_heading);
+        odom_pos.x += local_x * cos(avg_heading);
         odom_pos.y += local_x * sin(avg_heading);
-        odom_pos.theta = heading;
+        odom_pos.theta = avg_heading;
 
         pros::lcd::print(0, "X: %f", odom_pos.x); // x
         pros::lcd::print(1, "Y: %f", odom_pos.y); // y
@@ -176,7 +183,7 @@ void gheese::update() {
         // pros::lcd::print(2, "Theta: %f", imu.get_heading()); // heading
         
         // // save old pos
-        gheese::Pos prev_pos = odom_pos;
+        // gheese::Pos prev_pos = odom_pos;
         pros::delay(ez::util::DELAY_TIME);
     }
 }

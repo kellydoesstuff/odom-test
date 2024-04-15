@@ -17,8 +17,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 using namespace ez;
 
-gheese::OdomSensors::OdomSensors (gheese::TrackingWheel* vertical, gheese::TrackingWheel* horizontal, pros::Imu* imu)
+gheese::OdomSensors::OdomSensors (gheese::TrackingWheel* vertical, gheese::TrackingWheel* vertical1, gheese::TrackingWheel* horizontal, pros::Imu* imu)
         : vertical(vertical),
+          vertical1(vertical1),
           horizontal(horizontal),
           imu(imu){}
 
