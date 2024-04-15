@@ -1,5 +1,6 @@
 #include "EZ-Template/odom/tracking_wheel.hpp"
 #include <math.h>
+#include "EZ-Template/util.hpp"
 
 
 /**
